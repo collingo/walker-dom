@@ -2,4 +2,4 @@
 
 # Walker DOM
 
-DOM adaptor for walking a DOM tree with collingo/walker.
+DOM adaptor for walking a DOM tree with [collingo/walker](https://github.com/collingo/walker).
