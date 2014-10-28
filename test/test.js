@@ -5,19 +5,19 @@ var sinonChai = require('sinon-chai');
 var expect = chai.expect;
 chai.use(sinonChai);
 
-var sandbox;
-
 //// SUT
 var WalkerDom = require('../src/walker-dom');
 
 describe('WalkerDom', function() {
 
+  var sandbox;
   var walkerDom;
-  var result;
+  var callback;
 
   beforeEach(function() {
     sandbox = sinon.sandbox.create();
     walkerDom = new WalkerDom();
+    callback = sandbox.spy();
   });
 
   afterEach(function() {
@@ -27,13 +27,13 @@ describe('WalkerDom', function() {
   describe('child', function() {
 
     beforeEach(function() {
-      result = walkerDom.child({
+      walkerDom.child(callback, {
         firstChild: '123'
       });
     });
 
-    it('should return the value of firstChild', function() {
-      expect(result).to.equal('123');
+    it('should call the callback with the value of firstChild', function() {
+      expect(callback).to.have.been.calledWith('123');
     });
 
   });
@@ -41,13 +41,13 @@ describe('WalkerDom', function() {
   describe('sibling', function() {
 
     beforeEach(function() {
-      result = walkerDom.sibling({
+      walkerDom.sibling(callback, {
         nextSibling: '456'
       });
     });
 
-    it('should return the value of nextSibling', function() {
-      expect(result).to.equal('456');
+    it('should call the callback with the value of nextSibling', function() {
+      expect(callback).to.have.been.calledWith('456');
     });
 
   });
